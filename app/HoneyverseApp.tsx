@@ -1,9 +1,9 @@
-"use client";
+﻿"use client";
 
 import { useState, useRef, useCallback } from "react";
 import type { MediaItem } from "./lib/media";
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Icons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function HomeIcon({ active }: { active: boolean }) {
   return (
@@ -35,7 +35,7 @@ function ListenIcon({ active }: { active: boolean }) {
   );
 }
 
-// ─── Nav Bar ──────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Nav Bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 type Tab = "garden" | "time" | "scrapbook" | "listen";
 
@@ -57,11 +57,18 @@ function NavBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
         background: "rgba(44,36,22,0.97)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
-        paddingBottom: "env(safe-area-inset-bottom, 8px)",
         borderTop: "1px solid rgba(212,168,83,0.15)",
+        // Padding: 8px top, then safe-area for home indicator, then 0 extra
+        paddingTop: 8,
+        paddingBottom: "env(safe-area-inset-bottom, 0px)",
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center", paddingTop: 8, paddingBottom: 4 }}>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        alignItems: "center",
+        paddingBottom: 6,
+      }}>
         {items.map(({ id, label, icon }) => (
           <button
             key={id}
@@ -70,18 +77,25 @@ function NavBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 2,
-              padding: "6px 16px",
+              justifyContent: "center",
+              gap: 3,
+              height: 48,
               background: "none",
               border: "none",
               cursor: "pointer",
               color: tab === id ? "var(--honey-accent)" : "rgba(250,247,242,0.4)",
               transition: "color 0.2s",
-              minWidth: 56,
+              padding: 0,
+              width: "100%",
             }}
           >
             {icon(tab === id)}
-            <span style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.08em" }}>{label}</span>
+            <span style={{
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.06em",
+              lineHeight: 1,
+            }}>{label}</span>
           </button>
         ))}
       </div>
@@ -89,7 +103,7 @@ function NavBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
   );
 }
 
-// ─── Lightbox ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Lightbox â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function Lightbox({ item, onClose }: { item: MediaItem; onClose: () => void }) {
   return (
@@ -109,7 +123,7 @@ function Lightbox({ item, onClose }: { item: MediaItem; onClose: () => void }) {
           fontSize: 24, cursor: "pointer", width: 44, height: 44,
           display: "flex", alignItems: "center", justifyContent: "center",
         }}
-      >✕</button>
+      >âœ•</button>
       <div
         onClick={(e) => e.stopPropagation()}
         style={{ maxWidth: "100vw", maxHeight: "100vh", padding: 16, boxSizing: "border-box" }}
@@ -146,7 +160,7 @@ function Lightbox({ item, onClose }: { item: MediaItem; onClose: () => void }) {
   );
 }
 
-// ─── Media Thumbnail ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Media Thumbnail â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function thumbSrc(item: MediaItem): string {
   if (item.media_type === "photo") return item.path;
@@ -214,7 +228,7 @@ function MediaThumb({ item, onClick }: { item: MediaItem; onClick: () => void })
   );
 }
 
-// ─── Garden Screen ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Garden Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function GardenScreen({ media, onSetTab, onOpenItem }: {
   media: MediaItem[];
@@ -234,8 +248,8 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
   }, [media, surpriseItem]);
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: 88 }}>
-      {/* Hero — full-width, fixed height, no overflow */}
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
+      {/* Hero â€” full-width, fixed height, no overflow */}
       <div style={{ position: "relative", width: "100%", height: "70svh", overflow: "hidden" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -301,7 +315,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
             letterSpacing: "0.05em", cursor: "pointer",
           }}
         >
-          ✦ Surprise me
+          âœ¦ Surprise me
         </button>
         {surpriseItem && (
           <div style={{ marginTop: 12 }}>
@@ -322,21 +336,21 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
           onClick={() => onSetTab("time")}
           style={{ marginTop: 10, width: "100%", background: "none", border: "none", color: "var(--honey-muted)", fontSize: 12, cursor: "pointer", padding: "6px 0" }}
         >
-          See all {photos.length} photos →
+          See all {photos.length} photos â†’
         </button>
       </div>
     </div>
   );
 }
 
-// ─── Timeline Screen ──────────────────────────────────────────────────────────
+// â”€â”€â”€ Timeline Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (i: MediaItem) => void }) {
   const [filter, setFilter] = useState<"all" | "photo" | "video">("all");
   const filtered = filter === "all" ? media : media.filter((m) => m.media_type === filter);
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: 88 }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
       {/* Sticky header */}
       <div style={{
         position: "sticky", top: 0, zIndex: 10,
@@ -366,13 +380,13 @@ function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem:
   );
 }
 
-// ─── Scrapbook Screen ─────────────────────────────────────────────────────────
+// â”€â”€â”€ Scrapbook Screen â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const COLLECTIONS = [
-  { id: "adventures", title: "Favorite Adventures", emoji: "🌿", filter: (m: MediaItem) => m.media_type === "photo" && /IMG_[789]\d{3}/i.test(m.filename) },
-  { id: "sounds",     title: "The Sounds of Honey", emoji: "🎵", filter: (m: MediaItem) => m.media_type === "video" },
-  { id: "earlyyears", title: "The Early Years",     emoji: "🌱", filter: (m: MediaItem) => m.media_type === "photo" && /IMG_[0-4]\d{3}/i.test(m.filename) },
-  { id: "athome",     title: "Honey at Home",       emoji: "🏡", filter: (m: MediaItem) => m.media_type === "photo" },
+  { id: "adventures", title: "Favorite Adventures", emoji: "ðŸŒ¿", filter: (m: MediaItem) => m.media_type === "photo" && /IMG_[789]\d{3}/i.test(m.filename) },
+  { id: "sounds",     title: "The Sounds of Honey", emoji: "ðŸŽµ", filter: (m: MediaItem) => m.media_type === "video" },
+  { id: "earlyyears", title: "The Early Years",     emoji: "ðŸŒ±", filter: (m: MediaItem) => m.media_type === "photo" && /IMG_[0-4]\d{3}/i.test(m.filename) },
+  { id: "athome",     title: "Honey at Home",       emoji: "ðŸ¡", filter: (m: MediaItem) => m.media_type === "photo" },
 ];
 
 function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (i: MediaItem) => void }) {
@@ -382,14 +396,14 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
 
   if (openId && openCol) {
     return (
-      <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: 88 }}>
+      <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
         <div style={{
           position: "sticky", top: 0, zIndex: 10,
           background: "rgba(250,247,242,0.94)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
           padding: "52px 20px 12px",
         }}>
           <button onClick={() => setOpenId(null)} style={{ background: "none", border: "none", color: "var(--honey-earth)", fontSize: 14, cursor: "pointer", padding: "0 0 8px" }}>
-            ← Collections
+            â† Collections
           </button>
           <h2 style={{ fontSize: 22, fontWeight: 700, margin: "0 0 2px", fontFamily: "Georgia, serif", color: "var(--honey-dark)" }}>
             {openCol.emoji} {openCol.title}
@@ -406,7 +420,7 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
   }
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: 88, padding: "56px 20px 88px" }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))", padding: "56px 20px 0" }}>
       <h2 style={{ fontSize: 26, fontWeight: 700, margin: "0 0 4px", fontFamily: "Georgia, serif", color: "var(--honey-dark)" }}>Memories</h2>
       <p style={{ fontSize: 13, color: "var(--honey-muted)", margin: "0 0 24px" }}>Her story, collected.</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -451,7 +465,7 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
   );
 }
 
-// ─── Listen & Discover ────────────────────────────────────────────────────────
+// â”€â”€â”€ Listen & Discover â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (i: MediaItem) => void }) {
   const videos = media.filter((m) => m.media_type === "video");
@@ -460,7 +474,7 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
   const activeVideo = videos.find((v) => v.id === activeId);
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: 88 }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
       <div style={{ padding: "56px 20px 16px" }}>
         <h2 style={{ fontSize: 26, fontWeight: 700, margin: "0 0 4px", fontFamily: "Georgia, serif", color: "var(--honey-dark)" }}>
           Listen &amp; Discover
@@ -545,7 +559,7 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
   );
 }
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 const sectionLabel: React.CSSProperties = {
   fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase",
@@ -570,14 +584,14 @@ function filterBtn(active: boolean): React.CSSProperties {
   };
 }
 
-// ─── App Shell ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ App Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export default function HoneyverseApp({ media }: { media: MediaItem[] }) {
   const [tab, setTab] = useState<Tab>("garden");
   const [lightboxItem, setLightboxItem] = useState<MediaItem | null>(null);
 
   return (
-    // Outer shell: full viewport, no overflow — all screens scroll internally
+    // Outer shell: full viewport, no overflow â€” all screens scroll internally
     <div style={{ width: "100vw", height: "100svh", overflow: "hidden", position: "relative", background: "var(--honey-ivory)" }}>
       <div style={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden" }}>
         {tab === "garden"    && <GardenScreen    media={media} onSetTab={setTab}  onOpenItem={setLightboxItem} />}
