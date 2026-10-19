@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import type { MediaItem } from "./lib/media";
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -73,19 +73,58 @@ function NavBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
   );
 }
 
-// ── Lightbox ──────────────────────────────────────────────────────────────────
+// ── Lightbox with swipe navigation ───────────────────────────────────────────
 
-function Lightbox({ item, onClose }: { item: MediaItem; onClose: () => void }) {
+function Lightbox({ item, allMedia, onClose, onNavigate }: {
+  item: MediaItem;
+  allMedia: MediaItem[];
+  onClose: () => void;
+  onNavigate: (item: MediaItem) => void;
+}) {
   const dateStr = item.captured_at
     ? new Date(item.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
     : null;
 
+  const idx = allMedia.findIndex((m) => m.id === item.id);
+  const prev = idx > 0 ? allMedia[idx - 1] : null;
+  const next = idx < allMedia.length - 1 ? allMedia[idx + 1] : null;
+
+  // Keyboard navigation (desktop)
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+      else if (e.key === "ArrowLeft" && prev) onNavigate(prev);
+      else if (e.key === "ArrowRight" && next) onNavigate(next);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [prev, next, onClose, onNavigate]);
+
+  // Touch swipe
+  const touchStartX = useRef<number | null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(dx) < 40) return; // ignore tiny swipes
+    if (dx < 0 && next) onNavigate(next);   // swipe left = next
+    if (dx > 0 && prev) onNavigate(prev);   // swipe right = prev
+  };
+
   return (
-    <div onClick={onClose} style={{
-      position: "fixed", inset: 0, zIndex: 100,
-      background: "rgba(0,0,0,0.96)",
-      display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-    }}>
+    <div
+      onClick={onClose}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      style={{
+        position: "fixed", inset: 0, zIndex: 100,
+        background: "rgba(0,0,0,0.96)",
+        display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+        userSelect: "none",
+      }}
+    >
+      {/* Close */}
       <button onClick={onClose} style={{
         position: "absolute", top: 16, right: 16, zIndex: 101,
         color: "rgba(255,255,255,0.7)", background: "none", border: "none",
@@ -93,40 +132,70 @@ function Lightbox({ item, onClose }: { item: MediaItem; onClose: () => void }) {
         display: "flex", alignItems: "center", justifyContent: "center",
       }}>&#x2715;</button>
 
+      {/* Prev arrow */}
+      {prev && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNavigate(prev); }}
+          style={{
+            position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)",
+            zIndex: 101, color: "rgba(255,255,255,0.6)", background: "rgba(0,0,0,0.3)",
+            border: "none", borderRadius: 8, width: 36, height: 48, cursor: "pointer",
+            fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >&#x2039;</button>
+      )}
+
+      {/* Next arrow */}
+      {next && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNavigate(next); }}
+          style={{
+            position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)",
+            zIndex: 101, color: "rgba(255,255,255,0.6)", background: "rgba(0,0,0,0.3)",
+            border: "none", borderRadius: 8, width: 36, height: 48, cursor: "pointer",
+            fontSize: 18, display: "flex", alignItems: "center", justifyContent: "center",
+          }}
+        >&#x203A;</button>
+      )}
+
+      {/* Media */}
       <div onClick={(e) => e.stopPropagation()} style={{
-        maxWidth: "100vw", maxHeight: "100vh", padding: "16px 16px 0", boxSizing: "border-box",
+        maxWidth: "100vw", maxHeight: "100vh", padding: "16px 56px 0", boxSizing: "border-box",
       }}>
         {item.media_type === "video" ? (
           <video src={item.path} controls playsInline style={{
-            maxWidth: "calc(100vw - 32px)", maxHeight: "calc(80vh - 32px)",
+            maxWidth: "calc(100vw - 112px)", maxHeight: "calc(80vh - 32px)",
             borderRadius: 12, background: "#000", display: "block",
           }} />
         ) : (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={item.path} alt="Memory" style={{
-            maxWidth: "calc(100vw - 32px)", maxHeight: "calc(80vh - 32px)",
+            maxWidth: "calc(100vw - 112px)", maxHeight: "calc(80vh - 32px)",
             borderRadius: 12, objectFit: "contain", display: "block",
           }} />
         )}
       </div>
 
-      {(dateStr || item.description) && (
-        <div onClick={(e) => e.stopPropagation()} style={{
-          padding: "12px 20px 16px", textAlign: "center",
-          maxWidth: "calc(100vw - 32px)",
-        }}>
-          {dateStr && (
-            <p style={{ fontSize: 13, color: "var(--honey-accent)", margin: "0 0 3px", fontWeight: 500 }}>
-              {dateStr}
-            </p>
-          )}
-          {item.description && (
-            <p style={{ fontSize: 12, color: "rgba(250,247,242,0.55)", margin: 0 }}>
-              &#x1F4CD; {item.description}
-            </p>
-          )}
-        </div>
-      )}
+      {/* Caption */}
+      <div onClick={(e) => e.stopPropagation()} style={{
+        padding: "10px 60px 16px", textAlign: "center", maxWidth: "100vw", boxSizing: "border-box",
+      }}>
+        {dateStr && (
+          <p style={{ fontSize: 13, color: "var(--honey-accent)", margin: "0 0 3px", fontWeight: 500 }}>{dateStr}</p>
+        )}
+        {item.description && (
+          <p style={{ fontSize: 12, color: "rgba(250,247,242,0.6)", margin: 0 }}>
+            &#x1F4CD; {item.description}
+          </p>
+        )}
+        {!dateStr && !item.description && (
+          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", margin: 0 }}>{item.filename}</p>
+        )}
+        {/* Position indicator */}
+        <p style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", margin: "6px 0 0" }}>
+          {idx + 1} / {allMedia.length}
+        </p>
+      </div>
     </div>
   );
 }
@@ -274,11 +343,19 @@ function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem:
   const [filter, setFilter] = useState<"all" | "photo" | "video">("all");
   const filtered = filter === "all" ? media : media.filter((m) => m.media_type === filter);
 
-  // Group by year
+  // Sort by capture date ascending; undated items go last (sorted by filename)
+  const sorted = [...filtered].sort((a, b) => {
+    const da = a.captured_at ? new Date(a.captured_at).getTime() : Infinity;
+    const db = b.captured_at ? new Date(b.captured_at).getTime() : Infinity;
+    if (da !== db) return da - db;
+    return a.filename.localeCompare(b.filename);
+  });
+
+  // Group by year (undated → "Undated")
   type Group = { year: string; items: MediaItem[] };
   const groups: Group[] = [];
-  for (const item of filtered) {
-    const year = item.captured_at ? new Date(item.captured_at).getFullYear().toString() : "Unknown";
+  for (const item of sorted) {
+    const year = item.captured_at ? new Date(item.captured_at).getFullYear().toString() : "Undated";
     const last = groups[groups.length - 1];
     if (last && last.year === year) {
       last.items.push(item);
@@ -482,7 +559,14 @@ export default function HoneyverseApp({ media }: { media: MediaItem[] }) {
         {tab === "listen"    && <ListenScreen    media={media} onOpenItem={setLightboxItem} />}
       </div>
       <NavBar tab={tab} setTab={setTab} />
-      {lightboxItem && <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />}
+      {lightboxItem && (
+        <Lightbox
+          item={lightboxItem}
+          allMedia={media}
+          onClose={() => setLightboxItem(null)}
+          onNavigate={(it) => setLightboxItem(it)}
+        />
+      )}
     </div>
   );
 }
