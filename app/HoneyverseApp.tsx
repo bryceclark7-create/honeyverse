@@ -225,6 +225,9 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
   const featured = photos[Math.floor(photos.length * 0.3)] ?? photos[0];
   const [surpriseItem, setSurpriseItem] = useState<MediaItem | null>(null);
 
+  // Use IMG_7808 as hero if present, else first photo
+  const hero = media.find((m) => m.filename === "IMG_7808.JPEG") ?? photos[0];
+
   const handleSurprise = useCallback(() => {
     const pool = media.filter((m) => m !== surpriseItem);
     setSurpriseItem(pool[Math.floor(Math.random() * pool.length)]);
@@ -236,7 +239,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
       <div style={{ position: "relative", width: "100%", height: "70svh", overflow: "hidden" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/honey/IMG_7808.JPEG"
+          src={hero?.path ?? "/honey/IMG_7808.JPEG"}
           alt="Honey"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }}
         />
