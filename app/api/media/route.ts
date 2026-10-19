@@ -55,8 +55,8 @@ export async function GET() {
 
     return NextResponse.json(results, {
       headers: {
-        // Cache for 50 minutes — signed URLs are valid for 60
-        "Cache-Control": "private, max-age=3000",
+        // Always revalidate — signed URLs expire and metadata can change
+        "Cache-Control": "no-store, must-revalidate",
       },
     });
   } catch (err) {

@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import type { MediaItem } from "./lib/media";
 
-// ── Icons ─────────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Icons Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function HomeIcon({ active }: { active: boolean }) {
   return (
@@ -35,7 +35,7 @@ function ListenIcon({ active }: { active: boolean }) {
   );
 }
 
-// ── Nav Bar ───────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Nav Bar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 type Tab = "garden" | "time" | "scrapbook" | "listen";
 
@@ -73,7 +73,7 @@ function NavBar({ tab, setTab }: { tab: Tab; setTab: (t: Tab) => void }) {
   );
 }
 
-// ── Lightbox with swipe navigation ───────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Lightbox with swipe navigation Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function Lightbox({ item, allMedia, onClose, onNavigate }: {
   item: MediaItem;
@@ -188,9 +188,6 @@ function Lightbox({ item, allMedia, onClose, onNavigate }: {
             &#x1F4CD; {item.description}
           </p>
         )}
-        {!dateStr && !item.description && (
-          <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", margin: 0 }}>{item.filename}</p>
-        )}
         {/* Position indicator */}
         <p style={{ fontSize: 10, color: "rgba(255,255,255,0.2)", margin: "6px 0 0" }}>
           {idx + 1} / {allMedia.length}
@@ -200,7 +197,7 @@ function Lightbox({ item, allMedia, onClose, onNavigate }: {
   );
 }
 
-// ── Media Thumbnail ───────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Media Thumbnail Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function thumbSrc(item: MediaItem): string {
   if (item.media_type === "photo") return item.path;
@@ -242,7 +239,7 @@ function MediaThumb({ item, onClick }: { item: MediaItem; onClick: () => void })
   );
 }
 
-// ── Garden Screen ─────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Garden Screen Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function GardenScreen({ media, onSetTab, onOpenItem }: {
   media: MediaItem[]; onSetTab: (t: Tab) => void; onOpenItem: (i: MediaItem) => void;
@@ -260,7 +257,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
   }, [media, surpriseItem]);
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))" }}>
       {/* Hero */}
       <div style={{ position: "relative", width: "100%", height: "70svh", overflow: "hidden" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -314,7 +311,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
             {surpriseItem.captured_at && (
               <p style={{ fontSize: 11, color: "var(--honey-muted)", margin: "6px 0 0", textAlign: "center" }}>
                 {new Date(surpriseItem.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                {surpriseItem.description ? ` · ${surpriseItem.description}` : ""}
+                {surpriseItem.description ? ` Ã‚Â· ${surpriseItem.description}` : ""}
               </p>
             )}
           </div>
@@ -337,7 +334,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
   );
 }
 
-// ── Timeline Screen ───────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Timeline Screen Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (i: MediaItem) => void }) {
   const [filter, setFilter] = useState<"all" | "photo" | "video">("all");
@@ -351,7 +348,7 @@ function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem:
     return a.filename.localeCompare(b.filename);
   });
 
-  // Group by year (undated → "Undated")
+  // Group by year (undated Ã¢â€ â€™ "Undated")
   type Group = { year: string; items: MediaItem[] };
   const groups: Group[] = [];
   for (const item of sorted) {
@@ -365,7 +362,7 @@ function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem:
   }
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))" }}>
       <div style={{
         position: "sticky", top: 0, zIndex: 10,
         background: "rgba(250,247,242,0.94)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)",
@@ -401,7 +398,7 @@ function TimelineScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem:
   );
 }
 
-// ── Scrapbook Screen ──────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Scrapbook Screen Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 const COLLECTIONS = [
   { id: "adventures", title: "Favorite Adventures", emoji: "&#x1F33F;", filter: (m: MediaItem) => m.media_type === "photo" && /IMG_[789]\d{3}/i.test(m.filename) },
@@ -417,7 +414,7 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
 
   if (openId && openCol) {
     return (
-      <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
+      <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))" }}>
         <div style={{ position: "sticky", top: 0, zIndex: 10, background: "rgba(250,247,242,0.94)", backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)", padding: "52px 20px 12px" }}>
           <button onClick={() => setOpenId(null)} style={{ background: "none", border: "none", color: "var(--honey-earth)", fontSize: 14, cursor: "pointer", padding: "0 0 8px" }}>&#x2190; Collections</button>
           <h2 style={{ fontSize: 22, fontWeight: 700, margin: "0 0 2px", fontFamily: "Georgia, serif", color: "var(--honey-dark)" }}
@@ -432,7 +429,7 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
   }
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))", padding: "56px 20px 0" }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingTop: 56, paddingLeft: 20, paddingRight: 20, paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))" }}>
       <h2 style={{ fontSize: 26, fontWeight: 700, margin: "0 0 4px", fontFamily: "Georgia, serif", color: "var(--honey-dark)" }}>Memories</h2>
       <p style={{ fontSize: 13, color: "var(--honey-muted)", margin: "0 0 24px" }}>Her story, collected.</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -463,7 +460,7 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
   );
 }
 
-// ── Listen & Discover ─────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Listen & Discover Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (i: MediaItem) => void }) {
   const videos = media.filter((m) => m.media_type === "video");
@@ -472,7 +469,7 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
   const activeVideo = videos.find((v) => v.id === activeId);
 
   return (
-    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(72px + env(safe-area-inset-bottom, 0px))" }}>
+    <div style={{ width: "100%", overflowX: "hidden", overflowY: "auto", paddingBottom: "calc(96px + env(safe-area-inset-bottom, 0px))" }}>
       <div style={{ padding: "56px 20px 16px" }}>
         <h2 style={{ fontSize: 26, fontWeight: 700, margin: "0 0 4px", fontFamily: "Georgia, serif", color: "var(--honey-dark)" }}>Listen &amp; Discover</h2>
         <p style={{ fontSize: 13, color: "var(--honey-muted)", margin: "0 0 24px" }}>Hear her. See her. Remember.</p>
@@ -483,11 +480,14 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
               style={{ width: "100%", display: "block", background: "#000", maxHeight: "40vh" }} />
             <div style={{ padding: "10px 16px 14px" }}>
               <p style={{ fontSize: 11, color: "var(--honey-accent)", margin: "0 0 2px", fontWeight: 500 }}>Now playing</p>
-              <p style={{ fontSize: 13, color: "var(--honey-warm)", margin: 0 }}>{activeVideo.filename}</p>
-              {activeVideo.captured_at && (
+              <p style={{ fontSize: 13, color: "var(--honey-warm)", margin: 0 }}>
+                {activeVideo.captured_at
+                  ? new Date(activeVideo.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+                  : "A memory of Honey"}
+              </p>
+              {activeVideo.description && (
                 <p style={{ fontSize: 11, color: "rgba(250,247,242,0.45)", margin: "2px 0 0" }}>
-                  {new Date(activeVideo.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-                  {activeVideo.description ? ` · ${activeVideo.description}` : ""}
+                  &#x1F4CD; {activeVideo.description}
                 </p>
               )}
             </div>
@@ -497,7 +497,6 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {videos.map((v) => {
             const isActive = v.id === activeId;
-            const dateStr = v.captured_at ? new Date(v.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : null;
             return (
               <button key={v.id} onClick={() => { setActiveId(v.id); setTimeout(() => videoRef.current?.play(), 150); }}
                 style={{ display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 12, textAlign: "left", cursor: "pointer", background: isActive ? "var(--honey-dark)" : "var(--honey-warm)", border: `1px solid ${isActive ? "var(--honey-gold)" : "rgba(139,111,71,0.15)"}` }}>
@@ -512,11 +511,16 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
                   </div>
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 12, fontWeight: 500, color: isActive ? "var(--honey-accent)" : "var(--honey-earth)", margin: "0 0 2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{v.filename}</p>
-                  <p style={{ fontSize: 11, color: isActive ? "rgba(250,247,242,0.45)" : "var(--honey-muted)", margin: 0 }}>
-                    {dateStr ?? `${(v.file_size / 1_000_000).toFixed(1)} MB`}
-                    {v.description ? ` · ${v.description}` : ""}
+                  <p style={{ fontSize: 13, fontWeight: 500, color: isActive ? "var(--honey-accent)" : "var(--honey-earth)", margin: "0 0 2px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {v.captured_at
+                      ? new Date(v.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+                      : "A memory of Honey"}
                   </p>
+                  {v.description && (
+                    <p style={{ fontSize: 11, color: isActive ? "rgba(250,247,242,0.45)" : "var(--honey-muted)", margin: 0, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      {v.description}
+                    </p>
+                  )}
                 </div>
                 <button onClick={(e) => { e.stopPropagation(); onOpenItem(v); }}
                   style={{ flexShrink: 0, fontSize: 11, padding: "4px 10px", borderRadius: 8, background: "rgba(200,149,42,0.15)", color: "var(--honey-gold)", border: "none", cursor: "pointer" }}>
@@ -531,7 +535,7 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
   );
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ Helpers Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 const sectionLabel: React.CSSProperties = {
   fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase",
@@ -544,7 +548,7 @@ function filterBtn(active: boolean): React.CSSProperties {
   return { padding: "6px 14px", borderRadius: 20, border: "none", cursor: "pointer", fontSize: 12, fontWeight: 500, background: active ? "var(--honey-dark)" : "rgba(139,111,71,0.12)", color: active ? "var(--honey-warm)" : "var(--honey-earth)" };
 }
 
-// ── App Shell ─────────────────────────────────────────────────────────────────
+// Ã¢â€â‚¬Ã¢â€â‚¬ App Shell Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 export default function HoneyverseApp({ media }: { media: MediaItem[] }) {
   const [tab, setTab] = useState<Tab>("garden");
