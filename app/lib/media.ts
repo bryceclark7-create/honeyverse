@@ -1,7 +1,8 @@
 export type MediaItem = {
   id: string;
   filename: string;
-  path: string;
+  path: string;        // full-resolution signed URL (lightbox / video)
+  thumb: string;       // small transformed signed URL (grid cells)
   media_type: "photo" | "video";
   file_size: number;
   captured_at: string | null;

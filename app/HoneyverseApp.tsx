@@ -200,11 +200,10 @@ function Lightbox({ item, allMedia, onClose, onNavigate }: {
 // Ã¢â€â‚¬Ã¢â€â‚¬ Media Thumbnail Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 
 function thumbSrc(item: MediaItem): string {
-  if (item.media_type === "photo") return item.path;
-  return item.path.replace(/\.[^.]+$/, ".JPEG");
+  return item.thumb || item.path;
 }
 
-function MediaThumb({ item, onClick }: { item: MediaItem; onClick: () => void }) {
+function MediaThumb({ item, onClick, eager }: { item: MediaItem; onClick: () => void; eager?: boolean }) {
   const [loaded, setLoaded] = useState(false);
   const [thumbFailed, setThumbFailed] = useState(false);
 
@@ -219,6 +218,8 @@ function MediaThumb({ item, onClick }: { item: MediaItem; onClick: () => void })
       <img
         src={thumbFailed ? item.path : thumbSrc(item)}
         alt=""
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
         style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
           objectFit: "cover", opacity: loaded ? 1 : 0, transition: "opacity 0.3s",
@@ -261,7 +262,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
       {/* Hero */}
       <div style={{ position: "relative", width: "100%", height: "70svh", overflow: "hidden" }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={hero?.path ?? ""} alt="Honey" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
+        <img src={hero?.path ?? ""} alt="Honey" loading="eager" fetchPriority="high" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(44,36,22,0.05) 0%, transparent 35%, rgba(44,36,22,0.65) 75%, rgba(44,36,22,0.95) 100%)" }} />
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0 24px 28px" }}>
           <p style={{ fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--honey-accent)", marginBottom: 4 }}>In loving memory</p>
@@ -288,7 +289,7 @@ function GardenScreen({ media, onSetTab, onOpenItem }: {
           <p style={sectionLabel}>A memory</p>
           <button onClick={() => onOpenItem(featured)} style={{ width: "100%", border: "none", padding: 0, cursor: "pointer", background: "none" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={featured.path} alt="" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 16, display: "block" }} />
+            <img src={featured.thumb || featured.path} alt="" loading="lazy" decoding="async" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: 16, display: "block" }} />
             {featured.captured_at && (
               <p style={{ fontSize: 11, color: "var(--honey-muted)", margin: "6px 0 0", textAlign: "center" }}>
                 {new Date(featured.captured_at).toLocaleDateString("en-US", { year: "numeric", month: "long" })}
@@ -442,7 +443,7 @@ function ScrapbookScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem
                 {items.map((item) => (
                   <div key={item.id} style={{ overflow: "hidden", background: "#d6cfc6" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={thumbSrc(item)} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} onError={(e) => { (e.target as HTMLImageElement).src = item.path; }} />
+                    <img src={thumbSrc(item)} alt="" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} onError={(e) => { (e.target as HTMLImageElement).src = item.path; }} />
                   </div>
                 ))}
                 {Array.from({ length: Math.max(0, 4 - items.length) }).map((_, i) => <div key={i} className="shimmer" style={{ height: "100%" }} />)}
@@ -502,7 +503,7 @@ function ListenScreen({ media, onOpenItem }: { media: MediaItem[]; onOpenItem: (
                 style={{ display: "flex", alignItems: "center", gap: 12, padding: 12, borderRadius: 12, textAlign: "left", cursor: "pointer", background: isActive ? "var(--honey-dark)" : "var(--honey-warm)", border: `1px solid ${isActive ? "var(--honey-gold)" : "rgba(139,111,71,0.15)"}` }}>
                 <div style={{ width: 52, height: 52, borderRadius: 8, overflow: "hidden", flexShrink: 0, position: "relative", background: "#c8bfb4" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={thumbSrc(v)} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  <img src={thumbSrc(v)} alt="" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                     onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                   <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <div style={{ width: 26, height: 26, borderRadius: "50%", background: isActive ? "var(--honey-accent)" : "rgba(0,0,0,0.5)", display: "flex", alignItems: "center", justifyContent: "center" }}>
